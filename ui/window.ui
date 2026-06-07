@@ -1,49 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkApplicationWindow" id="main_window">
     <property name="title">Hyprland Tweaker</property>
-    <property name="default-width">600</property>
-    <property name="default-height">400</property>
+    <property name="default-width">450</property>
+    <property name="default-height">850</property>
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <property name="halign">center</property>
-        <property name="valign">center</property>
-        <property name="spacing">20</property>
-        
+      <object class="GtkScrolledWindow">
+        <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="GtkLabel">
-            <property name="label">Обои (swaybg)</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="btn_wallpaper">
-            <property name="label">Выбрать и применить</property>
-          </object>
-        </child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="margin-start">20</property>
+            <property name="margin-end">20</property>
+            <property name="margin-top">20</property>
+            <property name="margin-bottom">20</property>
+            <property name="spacing">10</property>
+            
+            <child><object class="GtkLabel"><property name="label">&lt;b&gt;Управление шаблонами&lt;/b&gt;</property><property name="use-markup">true</property></object></child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">5</property>
+                <child><object class="GtkEntry" id="entry_preset_name"><property name="placeholder-text">Имя шаблона...</property><property name="hexpand">true</property></object></child>
+                <child><object class="GtkButton" id="btn_save_preset"><property name="label">Сохранить</property></object></child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">5</property>
+                <child><object class="GtkDropDown" id="combo_presets"><property name="hexpand">true</property></object></child>
+                <child><object class="GtkButton" id="btn_apply_preset"><property name="label">Применить</property></object></child>
+                <child><object class="GtkButton" id="btn_delete_preset"><property name="label">Удалить</property></object></child>
+              </object>
+            </child>
 
-        <child>
-          <object class="GtkSeparator"/>
-        </child>
+            <child><object class="GtkSeparator"/></child>
 
-        <child>
-          <object class="GtkLabel">
-            <property name="label">Цвет фона Kitty</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkColorDialogButton" id="color_btn_kitty_bg">
-            <property name="dialog">
-              <object class="GtkColorDialog"/>
-            </property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="btn_apply_kitty">
-            <property name="label">Применить цвет Kitty</property>
-          </object>
-        </child>
+            <child><object class="GtkButton" id="btn_wallpaper"><property name="label">Выбрать обои</property></object></child>
+            
+            <child><object class="GtkLabel"><property name="label">Цвет фона Kitty</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_kitty_bg"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+            <child><object class="GtkButton" id="btn_apply_kitty"><property name="label">Применить цвет Kitty</property></object></child>
 
+            <child><object class="GtkLabel"><property name="label">Отступы окон (gaps_in)</property></object></child>
+            <child>
+              <object class="GtkScale" id="scale_gaps_in">
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0</property>
+                    <property name="upper">50</property>
+                    <property name="step-increment">1</property>
+                    <property name="value">5</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+
+            <child><object class="GtkLabel"><property name="label">Активная рамка</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_hypr_border"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+            <child><object class="GtkButton" id="btn_apply_hypr_border"><property name="label">Применить активный</property></object></child>
+
+            <child><object class="GtkLabel"><property name="label">Неактивная рамка</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_hypr_border_inactive"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+            <child><object class="GtkButton" id="btn_apply_hypr_border_inactive"><property name="label">Применить неактивный</property></object></child>
+
+            <child><object class="GtkSeparator"/></child>
+            <child><object class="GtkLabel"><property name="label">&lt;b&gt;Wofi (Меню приложений)&lt;/b&gt;</property><property name="use-markup">true</property></object></child>
+            
+            <child><object class="GtkLabel"><property name="label">Фон меню</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_wofi_bg"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkLabel"><property name="label">Цвет текста</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_wofi_text"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkLabel"><property name="label">Цвет выделения</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_wofi_selected"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkLabel"><property name="label">Цвет рамки</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_wofi_border"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkButton" id="btn_apply_wofi"><property name="label">Применить цвета Wofi</property></object></child>
+
+            <child><object class="GtkSeparator"/></child>
+            
+            <child><object class="GtkLabel"><property name="label">&lt;b&gt;Waybar (Верхняя панель)&lt;/b&gt;</property><property name="use-markup">true</property></object></child>
+            <child><object class="GtkLabel"><property name="label">Цвет рабочих столов</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_waybar_workspace"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+            <child><object class="GtkButton" id="btn_apply_waybar"><property name="label">Применить цвета Waybar</property></object></child>
+
+            <child><object class="GtkSeparator"/></child>
+            
+            <child><object class="GtkLabel"><property name="label">&lt;b&gt;Control Center (Уведомления)&lt;/b&gt;</property><property name="use-markup">true</property></object></child>
+            
+            <child><object class="GtkLabel"><property name="label">Фон центра</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_swaync_bg"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkLabel"><property name="label">Текст и иконки</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_swaync_text"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkLabel"><property name="label">Акцент (слайдеры)</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_swaync_accent"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkLabel"><property name="label">Рамка</property></object></child>
+            <child><object class="GtkColorDialogButton" id="color_btn_swaync_border"><property name="dialog"><object class="GtkColorDialog"/></property></object></child>
+
+            <child><object class="GtkButton" id="btn_apply_swaync"><property name="label">Применить цвета Control Center</property></object></child>
+
+          </object>
+        </child>
       </object>
     </child>
   </object>
